@@ -1,0 +1,14 @@
+.layout{
+    display: flex;
+    flex-direction: column;
+    
+    .navbar{
+        flex:1;
+    }
+    .child{
+        flex:3;
+        .wrapper{
+            height: 65%;
+        }
+    }
+}

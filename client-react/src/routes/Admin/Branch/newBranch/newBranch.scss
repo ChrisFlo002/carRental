@@ -1,0 +1,176 @@
+// BranchAddForm.scss
+
+// Variables
+$primary-color: #5053d6;
+$secondary-color: #3f37c9;
+$light-gray: #f8f9fa;
+$medium-gray: #e9ecef;
+$dark-gray: #6c757d;
+$border-radius: 8px;
+$box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+$transition: all 0.3s ease;
+
+.branch-add-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+
+  .form-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    .back-button {
+      background-color: transparent;
+      border: none;
+      font-size: 1.5rem;
+      color: $primary-color;
+      cursor: pointer;
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      transition: $transition;
+
+      &:hover {
+        background-color: rgba($primary-color, 0.1);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    h1 {
+      margin: 0;
+      color: $primary-color;
+      font-weight: 600;
+    }
+  }
+
+  .branch-add-form {
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+
+        label {
+          margin-bottom: 0.5rem;
+          font-weight: 500;
+          color: $dark-gray;
+        }
+
+        input,
+        select {
+          padding: 0.75rem 1rem;
+          border: 1px solid $medium-gray;
+          border-radius: $border-radius - 2px;
+          font-size: 1rem;
+          transition: $transition;
+
+          &:focus {
+            outline: none;
+            border-color: $primary-color;
+            box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+          }
+        }
+
+        select {
+          appearance: none;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236c757d'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 1rem center;
+          background-size: 1.5rem;
+        }
+      }
+    }
+
+    .image-section {
+      padding: 1.5rem;
+      background-color: $light-gray;
+      border-radius: $border-radius;
+      margin-bottom: 2rem;
+
+      h2 {
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        color: $primary-color;
+        font-size: 1.5rem;
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+
+      button {
+        padding: 0.75rem 2rem;
+        border: none;
+        border-radius: $border-radius - 2px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: $transition;
+      }
+
+      .cancel-button {
+        background-color: $light-gray;
+        color: $dark-gray;
+
+        &:hover {
+          background-color: $medium-gray;
+        }
+      }
+
+      .submit-button {
+        background-color: $primary-color;
+        color: white;
+
+        &:hover {
+          background-color: $secondary-color;
+        }
+
+        &:active {
+          transform: scale(0.98);
+        }
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .branch-add-container {
+    padding: 1.5rem;
+
+    .form-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .branch-add-form {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-actions {
+        flex-direction: column;
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

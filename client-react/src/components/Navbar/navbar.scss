@@ -1,0 +1,194 @@
+// Navbar.scss
+.navbar {
+    background-color: rgba(255, 255, 255, 0.95);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  
+    &.scrolled {
+      padding: 5px 0;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+  
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 25px;
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      .logo-container {
+        height: 100%;
+        
+        .logo-link {
+          height: 100%;
+          display: flex;
+          align-items: center;
+        }
+        
+        .logo {
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+      
+      .hamburger {
+        display: none;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        height: 24px;
+        width: 30px;
+        position: relative;
+        z-index: 1001;
+        
+        span {
+          display: block;
+          height: 2px;
+          width: 100%;
+          background-color: #0a1c46;
+          margin: 6px 0;
+          transition: all 0.3s ease;
+          transform-origin: left center;
+        }
+        
+        &.active {
+          span {
+            &:nth-child(1) {
+              transform: rotate(45deg);
+            }
+            
+            &:nth-child(2) {
+              opacity: 0;
+            }
+            
+            &:nth-child(3) {
+              transform: rotate(-45deg);
+            }
+          }
+        }
+      }
+      
+      .nav-links {
+        .menu {
+          display: flex;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          align-items: center;
+          
+          .menu-item {
+            margin-left: 30px;
+            
+            &:first-child {
+              margin-left: 0;
+            }
+            
+            .menu-link {
+              color: #0e2866;
+              text-decoration: none;
+              font-size: 18px;
+              font-weight: 500;
+              position: relative;
+              padding: 5px 0;
+              transition: color 0.3s ease;
+              
+              &::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background-color: #194d81;
+                transition: width 0.3s ease;
+              }
+              
+              &:hover, &.active {
+                color: #194d81;
+                
+                &::after {
+                  width: 100%;
+                }
+              }
+            }
+            
+            .logout-button, .login-button {
+              background-color: #194d81;
+              color: white;
+              border: none;
+              padding: 9px 20px;
+              border-radius: 30px;
+              font-size: 15px;
+              font-weight: 500;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              box-shadow: 0 4px 10px rgba(0, 102, 204, 0.2);
+              text-decoration: none;
+              display: inline-block;
+              
+              &:hover {
+                background-color: #005bb7;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 15px rgba(0, 102, 204, 0.3);
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    // Responsive styles
+    @media (max-width: 768px) {
+      .navbar-container {
+        .hamburger {
+          display: block;
+        }
+        
+        .nav-links {
+          position: fixed;
+          top: 0;
+          right: -100%;
+          width: 80%;
+          max-width: 300px;
+          height: 100vh;
+          background-color: white;
+          padding: 80px 30px;
+          transition: right 0.4s ease;
+          box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+          
+          &.active {
+            right: 0;
+          }
+          
+          .menu {
+            flex-direction: column;
+            align-items: flex-start;
+            
+            .menu-item {
+              margin: 15px 0;
+              width: 100%;
+              
+              .menu-link {
+                font-size: 18px;
+                display: block;
+                padding: 8px 0;
+              }
+              
+              .logout-button, .login-button {
+                width: 100%;
+                text-align: center;
+                margin-top: 15px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }

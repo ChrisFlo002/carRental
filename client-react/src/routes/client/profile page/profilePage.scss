@@ -1,0 +1,184 @@
+.container {
+  background-color: white;
+  .up-region {
+    height: 150px;
+    padding: 0 10px;
+    background-color: white;
+    border-bottom: 1px solid #e0e0e0;
+    justify-content: space-between;
+    .logo {
+      height: 80%;
+      margin-left: 0px;
+    }
+
+    .profile-actions {
+      display: flex;
+      gap: 16px;
+
+      .profile-button,
+      .logout-button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .profile-button {
+        background-color: #0c2c50e5;
+        color: #fff;
+        &:hover {
+          scale: 1.1;
+        }
+      }
+
+      .logout-button {
+        background-color: #dc3545;
+        color: #fff;
+        &:hover {
+          scale: 1.1;
+        }
+      }
+    }
+  }
+  .body {
+    color: #0c2c50e5;
+    display: flex;
+    flex-direction: row;
+    .left-region,
+    .right-region {
+      height: 100%;
+      width: 50%;
+    }
+    .left-region {
+      color: #0c2c50e5;
+      display: flex;
+      flex-direction: column;
+      gap: 16px; // Space between rows
+      padding-top: 35px;
+      padding-left: 50px;
+      max-width: 400px; // Limit width for better layout
+      margin: 0 auto; //
+      .icon {
+        font-size: 20px; // Adjust icon size
+        color: #0c2c50e5;
+        margin-right: 12px; // Blue color for icons
+      }
+      .label {
+        font-weight: bold;
+        color: #06182ce5;
+        width: 80px;
+        margin-right: 10px;
+      }
+
+      .value {
+        color: #06182ce5;
+        flex: 1; // Takes up remaining space
+      }
+      .profile-actions {
+        display: flex;
+        gap: 16px;
+
+        .profile-button,
+        .logout-button {
+          padding: 8px 16px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 14px;
+        }
+
+        .profile-button {
+          background-color: #0c2c50e5;
+          color: #fff;
+          &:hover {
+            scale: 1.1;
+          }
+        }
+
+        .logout-button {
+          background-color: #dc3545;
+          color: #fff;
+          &:hover {
+            scale: 1.1;
+          }
+        }
+      }
+
+      .toggle-visibility {
+        background: none;
+        border: none;
+        size: 35px;
+        cursor: pointer;
+        color: #007bff; // Eye icon color
+        font-size: 18px;
+
+        &:hover {
+          color: #0056b3; // Darker blue on hover
+        }
+      }
+    }
+    .right-region {
+      display: flex;
+      flex-direction: column;
+      height: 100%; // Full height of the viewport
+      gap: 20px; // Space between sections
+      padding: 16px;
+
+      .section {
+        flex: 1; // Divide space equally between sections
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; // Align title at the top
+        gap: 16px;
+        background-color: #f4f4f4; // Background color for sections
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        overflow: hidden; // Prevent overflow outside the section
+
+        h2 {
+          margin: 0;
+          font-size: 20px;
+          font-weight: bold;
+          color: #333;
+        }
+
+        .scroll-container {
+          display: flex;
+          flex-direction: row;
+          gap: 16px; // Space between components
+          overflow-x: auto; // Enable horizontal scrolling
+          padding: 4px;
+          scrollbar-width: thin;
+          scrollbar-color: #007bff #f4f4f4;
+
+          // Child element styles
+          & > * {
+            flex: 0 0 auto; // Prevent child elements from shrinking or stretching
+            width: 200px; // Fixed width for scrolling items (adjust as needed)
+          }
+        }
+
+        .scroll-container::-webkit-scrollbar {
+          height: 8px; // Horizontal scrollbar height
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+          background-color: #007bff; // Thumb color
+          border-radius: 4px;
+        }
+
+        .scroll-container::-webkit-scrollbar-track {
+          background-color: #f4f4f4; // Track color
+        }
+
+        .no-data {
+          text-align: center;
+          font-size: 16px;
+          color: #777;
+          font-style: italic;
+        }
+      }
+    }
+  }
+}

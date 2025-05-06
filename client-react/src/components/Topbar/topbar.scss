@@ -1,0 +1,83 @@
+// Header.scss
+// Variables
+$background-color: #f8f9fa;
+$text-color: #334155;
+$light-text: #94a3b8;
+$border-color: #e2e8f0;
+$secondary-color: #f97316;
+
+// Mixins
+@mixin flex($direction: row, $justify: flex-start, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  @include flex(row, flex-end, center);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid $border-color;
+  background-color: #fff;
+  z-index: 3000000;
+
+  .notifications {
+    margin-right: 1.5rem;
+    position: relative;
+
+    .notification-icon {
+      width: 36px;
+      height: 36px;
+      background-color: $background-color;
+      border-radius: 50%;
+      @include flex(row, center, center);
+      cursor: pointer;
+
+      &::before {
+        content: "🔔";
+        font-size: 1.1rem;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 20px;
+        height: 20px;
+        background-color: $secondary-color;
+        color: white;
+        border-radius: 50%;
+        @include flex(row, center, center);
+        font-size: 0.7rem;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .user-profile {
+    @include flex();
+    cursor: pointer;
+
+    img {
+      width: 60px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 0.75rem;
+    }
+
+    .user-info {
+      .user-name {
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      .user-role {
+        font-size: 0.75rem;
+        color: $light-text;
+      }
+    }
+  }
+}

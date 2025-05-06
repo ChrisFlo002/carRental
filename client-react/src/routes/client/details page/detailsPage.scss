@@ -1,0 +1,225 @@
+// Modern variables
+$primary-color: #3a86ff;
+$secondary-color: #8338ec;
+$text-color: #333;
+$light-gray: #f8f9fa;
+$border-radius: 8px;
+$box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+$transition: all 0.3s ease;
+
+.details-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: $text-color;
+  
+  .car-detail-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+    
+    .back-button {
+      background: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-right: 16px;
+      box-shadow: $box-shadow;
+      transition: $transition;
+      
+      &:hover {
+        background: $light-gray;
+        transform: translateX(-2px);
+      }
+      
+      svg {
+        color: $text-color;
+      }
+    }
+    
+    h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin: 0;
+    }
+  }
+  
+  .main-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .image-section {
+    display: flex;
+    flex-direction: column;
+    
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: $border-radius;
+      object-fit: cover;
+      box-shadow: $box-shadow;
+      margin-bottom: 24px;
+    }
+    
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba($primary-color, 0.3);
+      border-radius: 50%;
+      border-top-color: $primary-color;
+      animation: spin 1s ease-in-out infinite;
+      margin: 40px auto;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  }
+  
+  // Modern car-info-section styling
+  .car-info-section {
+    background: white;
+    border-radius: $border-radius;
+    padding: 24px;
+    box-shadow: $box-shadow;
+    
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: $primary-color;
+      position: relative;
+      padding-bottom: 10px;
+      
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: $primary-color;
+        border-radius: 2px;
+      }
+    }
+    
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      
+      @media (max-width: 480px) {
+        grid-template-columns: 1fr;
+      }
+      
+      li {
+        display: flex;
+        align-items: center;
+        padding: 8px 0;
+        
+        &:before {
+          content: "•";
+          color: $secondary-color;
+          font-size: 20px;
+          margin-right: 8px;
+        }
+        
+        strong {
+          margin-right: 6px;
+          font-weight: 500;
+          color: #555;
+        }
+      }
+    }
+  }
+  
+  .booking-form {
+    background: white;
+    border-radius: $border-radius;
+    padding: 24px;
+    box-shadow: $box-shadow;
+    
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-top: 0;
+      margin-bottom: 24px;
+      color: $primary-color;
+    }
+    
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: #555;
+    }
+    
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border-radius: $border-radius;
+      border: 1px solid #ddd;
+      margin-bottom: 16px;
+      font-size: 15px;
+      transition: $transition;
+      
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+        box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+      }
+    }
+    
+    .total-value {
+      font-size: 24px;
+      font-weight: 600;
+      color: $secondary-color;
+      margin-bottom: 6px;
+    }
+    
+    .days-count {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 16px;
+    }
+    
+    button[type="submit"] {
+      width: 100%;
+      padding: 14px;
+      background: $primary-color;
+      color: white;
+      border: none;
+      border-radius: $border-radius;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: $transition;
+      
+      &:hover {
+        background: #2573f0;
+        transform: translateY(-2px);
+      }
+      
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+}

@@ -1,0 +1,136 @@
+// CarBox.scss
+.car-box {
+  width: 280px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
+  
+  .car-image-container {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+    transition: background-color 0.3s ease;
+    
+    &.hovering {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+    
+    .car-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    
+    .image-navigation {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      
+      .image-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        
+        &.active {
+          background-color: #0066cc;
+          transform: scale(1.2);
+        }
+        
+        &:hover {
+          background-color: #0066cc;
+        }
+      }
+    }
+  }
+  
+  .car-name {
+    padding: 12px 15px 8px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .car-features {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px 12px;
+    
+    .feature {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #555;
+      
+      .feature-icon {
+        width: 16px;
+        height: 16px;
+        margin-right: 5px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      
+      .range-icon {
+        background-image: url('path-to-range-icon.svg');
+      }
+      
+      .fuel-icon {
+        background-image: url('path-to-fuel-icon.svg');
+      }
+      
+      .transmission-icon {
+        background-image: url('path-to-transmission-icon.svg');
+      }
+    }
+  }
+  
+  .car-price-section {
+    padding: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .price {
+      font-size: 20px;
+      font-weight: 700;
+      color: #333;
+    }
+    
+    .view-details {
+      color: #0066cc;
+      text-decoration: none;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      
+      .arrow-icon {
+        width: 14px;
+        height: 14px;
+        margin-left: 5px;
+        background-image: url('path-to-arrow-icon.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+  }
+}

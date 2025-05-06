@@ -1,0 +1,452 @@
+.car-detail-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  font-family: "Arial", sans-serif;
+
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    font-size: 18px;
+    color: #666;
+  }
+
+  .car-detail-header {
+    padding: 16px 24px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+
+    .back-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: #4361ee;
+      margin-right: 15px;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: rgba(67, 97, 238, 0.1);
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: bold;
+      color: #333;
+    }
+  }
+
+  .car-detail-content {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    gap: 24px;
+
+    .car-info-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 24px;
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+      @media (max-width: 992px) {
+        grid-template-columns: 1fr;
+      }
+
+      .car-image-section {
+        position: relative;
+        height: 400px;
+        overflow: hidden;
+
+        @media (max-width: 768px) {
+          height: 300px;
+        }
+
+        .carousel {
+          position: relative;
+          width: 100%;
+          height: 100%;
+
+          .carousel-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+
+            .carousel-image {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              opacity: 0;
+              transition: opacity 0.5s ease;
+
+              &.active {
+                opacity: 1;
+                z-index: 1;
+              }
+            }
+          }
+
+          .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+
+            &:hover {
+              background-color: rgba(0, 0, 0, 0.7);
+            }
+
+            &.prev {
+              left: 16px;
+            }
+
+            &.next {
+              right: 16px;
+            }
+          }
+
+          .carousel-indicators {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 2;
+
+            .indicator {
+              width: 10px;
+              height: 10px;
+              border-radius: 50%;
+              border: none;
+              background-color: rgba(255, 255, 255, 0.5);
+              cursor: pointer;
+              padding: 0;
+
+              &.active {
+                background-color: white;
+              }
+            }
+          }
+        }
+      }
+
+      .car-info-details {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .car-price-container {
+          margin-bottom: 16px;
+
+          .price-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 4px;
+          }
+
+          .price-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+
+            span {
+              font-size: 16px;
+              font-weight: normal;
+              color: #666;
+              margin-left: 4px;
+            }
+          }
+        }
+
+        .car-branch {
+          margin-bottom: 16px;
+
+          .branch-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 4px;
+          }
+
+          .branch-name {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+          }
+        }
+
+        .car-specs {
+          background-color: #f9f9f9;
+          border-radius: 8px;
+          padding: 16px;
+
+          h3 {
+            margin: 0 0 16px 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+          }
+
+          .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+
+            @media (max-width: 576px) {
+              grid-template-columns: 1fr;
+            }
+
+            .spec-item {
+              display: flex;
+              justify-content: space-between;
+              padding-bottom: 8px;
+              border-bottom: 1px solid #eee;
+
+              .spec-label {
+                font-size: 14px;
+                color: #666;
+              }
+
+              .spec-value {
+                font-size: 14px;
+                font-weight: 500;
+                color: #333;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .maintenance-section {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 24px;
+
+      @media (max-width: 992px) {
+        grid-template-columns: 1fr;
+      }
+
+      .maintenance-form-container {
+        background-color: white;
+        border-radius: 8px;
+        padding: 24px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+        h2 {
+          margin: 0 0 20px 0;
+          font-size: 20px;
+          font-weight: 600;
+          color: #333;
+        }
+
+        .maintenance-form {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+
+          .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+
+            label {
+              font-size: 14px;
+              color: #666;
+            }
+
+            input,
+            textarea {
+              padding: 10px;
+              border: 1px solid #ddd;
+              border-radius: 6px;
+              font-size: 14px;
+              resize: vertical;
+              font-family: inherit;
+
+              &:focus {
+                outline: none;
+                border-color: #4361ee;
+                box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+              }
+            }
+
+            textarea {
+              min-height: 80px;
+            }
+          }
+
+          .submit-button {
+            padding: 12px;
+            background-color: #4361ee;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &:hover {
+              background-color: #3a56d4;
+            }
+
+            &:disabled {
+              opacity: 0.6;
+              cursor: not-allowed;
+            }
+          }
+        }
+      }
+
+      .maintenance-history {
+        background-color: white;
+        border-radius: 8px;
+        padding: 24px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+        h2 {
+          margin: 0 0 20px 0;
+          font-size: 20px;
+          font-weight: 600;
+          color: #333;
+        }
+
+        .no-records {
+          color: #666;
+          font-style: italic;
+        }
+
+        .table-container {
+          overflow-x: auto;
+
+          .maintenance-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+
+            th,
+            td {
+              padding: 12px 16px;
+              text-align: left;
+              border-bottom: 1px solid #eee;
+            }
+
+            th {
+              background-color: #f8f9fa;
+              font-weight: 600;
+              color: #555;
+            }
+
+            tr:hover {
+              background-color: #f8f9fa;
+            }
+
+            .status {
+              font-weight: 500;
+
+              &.completed {
+                color: #4caf50;
+              }
+
+              &.pending {
+                color: #f57c00;
+              }
+            }
+            .action-cell {
+              text-align: center;
+
+              .status-toggle-button {
+                padding: 6px 12px;
+                border: none;
+                border-radius: 4px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.2s ease;
+
+                &.complete {
+                  background-color: #e8f5e9;
+                  color: #2e7d32;
+
+                  &:hover {
+                    background-color: #c8e6c9;
+                  }
+                }
+
+                &.reopen {
+                  background-color: #fff8e1;
+                  color: #ff8f00;
+
+                  &:hover {
+                    background-color: #ffecb3;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

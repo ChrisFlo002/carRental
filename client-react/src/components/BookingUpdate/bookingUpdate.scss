@@ -1,0 +1,223 @@
+.booking-update-container {
+  position: fixed;
+  top: 150px;
+  left: 100px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px #194d81;
+
+  .form-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+
+    h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #333;
+      flex-grow: 1;
+      text-align: center;
+    }
+
+    .back-button {
+      background: none;
+      border: none;
+      color: #555;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 5px;
+      margin-right: 15px;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #1a73e8;
+      }
+    }
+
+    .booking-id {
+      background-color: #f0f7ff;
+      color: #0066cc;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+  }
+
+  .loading {
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: #666;
+  }
+
+  .error-message {
+    background-color: #fdecea;
+    color: #d93025;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+
+  .success-message {
+    background-color: #e6f4ea;
+    color: #137333;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+
+  .booking-info-section,
+  .client-info-section {
+    margin-bottom: 24px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 16px;
+
+    h2 {
+      font-size: 18px;
+      color: #333;
+      margin-top: 0;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eaeaea;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+
+      svg {
+        color: #5f6368;
+        margin-right: 12px;
+        margin-top: 4px;
+        font-size: 18px;
+      }
+
+      h3 {
+        font-size: 14px;
+        color: #5f6368;
+        margin: 0 0 4px 0;
+        font-weight: 500;
+      }
+
+      p {
+        font-size: 16px;
+        color: #202124;
+        margin: 0;
+        word-break: break-word;
+      }
+    }
+  }
+
+  .booking-update-form {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+
+    h2 {
+      font-size: 18px;
+      color: #333;
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+
+    .form-row {
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #333;
+      }
+
+      select {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        color: #333;
+        background-color: #fff;
+        transition: border-color 0.2s;
+
+        &:focus {
+          border-color: #1a73e8;
+          outline: none;
+        }
+
+        &.error {
+          border-color: #d93025;
+          background-color: #fff6f6;
+        }
+      }
+
+      .error-text {
+        display: block;
+        color: #d93025;
+        font-size: 12px;
+        margin-top: 5px;
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 24px;
+
+      button {
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &.cancel-button {
+          background-color: #f2f2f2;
+          color: #5f6368;
+          border: 1px solid #dadce0;
+
+          &:hover {
+            background-color: #e8e8e8;
+          }
+        }
+
+        &.submit-button {
+          background-color: #1a73e8;
+          color: white;
+          border: none;
+
+          &:hover {
+            background-color: #0d66d0;
+          }
+
+          &:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+}
