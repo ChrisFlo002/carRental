@@ -5,6 +5,8 @@ import ecocashImg from "../../assets/ecocash.png";
 import axios from "axios";
 import { AuthContext } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
+import { FaMoneyBillWaveAlt } from "react-icons/fa";
+import CustomDialog from "../DialogBox/dialogbox";
 
 
 const PaymentBox = ({ booking, onClose, car, numberOfDays }) => {
@@ -12,6 +14,7 @@ const PaymentBox = ({ booking, onClose, car, numberOfDays }) => {
   const [accountHolder, setAccountHolder] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [code, setCode] = useState("");
+  const [showDialog, setShowDialog] = useState(false);
   const {currentUser} = useContext(AuthContext);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -57,12 +60,12 @@ const PaymentBox = ({ booking, onClose, car, numberOfDays }) => {
       );
       console.log("Payment:",response.data.data);
       //update the booking status with api api/v1/bookings/:id/status
-      const updateBooking = await axios.put(`http://localhost:5000/api/v1/bookings/${booking._id}/status`,{status:"Confirmed"}, { headers: { Authorization: `Bearer ${currentUser.token}` } });
+      //const updateBooking = await axios.put(`http://localhost:5000/api/v1/bookings/${booking._id}/status`,{status:"Confirmed"}, { headers: { Authorization: `Bearer ${currentUser.token}` } });
       
-      console.log("Booking:",updateBooking.data.data);
-      alert("Payment submitted!");
+      //console.log("Booking:",updateBooking.data.data);
+      alert("Payment submitted! Please wait for confirmation.");
       onClose();
-      navigate("/client/bookings");
+      navigate("/");
     } catch (error) {
       alert("Payment failed. Please try again.");
       console.log(error);
@@ -70,7 +73,14 @@ const PaymentBox = ({ booking, onClose, car, numberOfDays }) => {
       setIsLoading(false);
     }
   };
- 
+  const handleCash = () => {
+    setShowDialog(true);
+  }
+  //close payment box
+  const onCloseDialog = () => {
+    setShowDialog(false);
+    onClose();
+  }
 
   return (
     <div className="payment-box">
@@ -117,6 +127,10 @@ const PaymentBox = ({ booking, onClose, car, numberOfDays }) => {
           <button className="pay" onClick={handleSubmit}>
             {isLoading ? "Loading...":"Pay Now"}
           </button>
+          Or
+          <button className="pay" onClick={handleCash}>
+            Pay Cash
+          </button>
         </div>
       </div>
 
@@ -141,6 +155,7 @@ const PaymentBox = ({ booking, onClose, car, numberOfDays }) => {
           <strong>Amount: $ {booking.priceBooking} </strong>
         </p>
       </div>
+      {showDialog && <CustomDialog onClose={() => onCloseDialog()} message={"For payment, please go at the adress: "+ car.branch.address} icon={<FaMoneyBillWaveAlt/>}/>}
     </div>
   );
 };

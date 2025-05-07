@@ -17,12 +17,12 @@ export const createPayment = async (req, res, next) => {
     }
 
     // Check if user is authorized
-    if (booking.client.toString() !== req.user.id && req.userType !== "admin") {
+    /*if (booking.client.toString() !== req.user.id && req.userType !== "admin") {
       return res.status(401).json({
         success: false,
         error: "Not authorized to make payment for this booking",
       });
-    }
+    }*/
 
     // Check if payment type exists
 
@@ -41,6 +41,7 @@ export const createPayment = async (req, res, next) => {
 
     // Update booking with payment details
     booking.paymentDetails = payment._id;
+    booking.bookingStatus = "Payed";
     await booking.save();
 
     res.status(201).json({

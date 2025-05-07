@@ -5,18 +5,19 @@ import {
   getBooking,
   updateBookingStatus,
   getMyBookings,
-  cancelBooking
+  cancelBooking,
+  updateBooking
 } from '../controllers/bookingController.js';
 
 import { protect, authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.route('/me').get(protect, authorize('client'), getMyBookings);
+router.route('/me/:id').get(protect, getMyBookings);
 
 router
   .route('/')
-  .get(protect, authorize('admin'), getBookings)
+  .get(protect, getBookings)
   .post(createBooking);
 
 router
@@ -25,8 +26,8 @@ router
 
 router
   .route('/:id/status')
-  .put(protect, authorize('admin', 'client'), updateBookingStatus);
-
+  .put(protect, updateBookingStatus);
+router.route('/:id').put(protect,updateBooking);
 router
   .route('/:id/cancel')
   .put(protect, cancelBooking);

@@ -78,6 +78,11 @@ function AdminLogin() {
       //navigating selon role
       if (res.data.profil === "admin") {
         navigate("/dash");
+      }else if(res.data.profil === "agent") {
+        navigate("/agent");
+      }
+      else {
+        navigate("/driver");
       }
     } catch (err) {
       let remaining = maxAttempts - attempts;

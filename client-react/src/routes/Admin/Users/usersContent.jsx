@@ -148,7 +148,7 @@ const UsersContent = () => {
               </div>
 
               <button className="btn-add-admin" onClick={handleAddAdmin}>
-                <FaPlus /> Add New Admin
+                <FaPlus /> Add New User
               </button>
             </div>
           </div>

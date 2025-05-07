@@ -32,6 +32,10 @@ const Navbar = () => {
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+  const handleLogout = () =>{
+    logout();
+    navigate("/admin");
+  }
 
   // Helper function to determine if a link should be active
   const isActive = (path) => {
@@ -65,27 +69,18 @@ const Navbar = () => {
           <ul className="menu">
             <li className="menu-item">
               <a
-                href="/client"
-                className={`menu-link ${isActive("/client") ? "active" : ""}`}
-                onClick={() => setActivePath("/client")}
-              >
-                Home
-              </a>
-            </li>
-            <li className="menu-item">
-              <a
                 href="/client/bookings"
                 className={`menu-link ${
-                  isActive("/client/bookings") ? "active" : ""
+                  isActive("/driver") ? "active" : ""
                 }`}
-                onClick={() => setActivePath("/client/bookings")}
+                onClick={() => setActivePath("/driver")}
               >
-                My Booking
+                My Bookings
               </a>
             </li>
             
               <li className="menu-item logout">
-                <button onClick={logout} className="logout-button">
+                <button onClick={handleLogout} className="logout-button">
                   Logout
                 </button>
               </li>

@@ -49,18 +49,35 @@ const Dashboard = () => {
         );
         console.log("Payments: ", response4.data.data);
         //set the dashboard data
+        // Get today's date and set time to beginning of day
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // Filter data for today only
+        const todayBookings = response2.data.data.filter((booking) => {
+          const bookingDate = new Date(booking.createdAt);
+          bookingDate.setHours(0, 0, 0, 0);
+          return bookingDate.getTime() === today.getTime();
+        });
+
+        const todayPayments = response4.data.data.filter((payment) => {
+          const paymentDate = new Date(payment.createdAt);
+          paymentDate.setHours(0, 0, 0, 0);
+          return paymentDate.getTime() === today.getTime();
+        });
+        // Set dashboard data with today's filtered data
         setDashboardData({
-          totalUser: response1.data.data.length,
-          totalBookings: response2.data.data.length,
-          totalSales: response4.data.data.reduce(
+          totalUser: 1,
+          totalBookings: todayBookings.length,
+          totalSales: todayPayments.reduce(
             (total, payment) => total + payment.amount,
             0
           ),
-          totalConfirmed: response2.data.data.filter(
+          totalConfirmed: todayBookings.filter(
             (booking) => booking.bookingStatus === "Confirmed"
           ).length,
-          bookings: response2.data.data,
-          payements: response4.data.data,
+          bookings: todayBookings,
+          payements: todayPayments,
         });
       } catch (error) {
         alert("Error fetching data");
@@ -85,13 +102,13 @@ const Dashboard = () => {
           ) : (
             <>
               <div className="stat-cards">
-                <div className="stat-card">
+                {/*<div className="stat-card">
                   <div className="stat-info">
                     <div className="stat-label">Total Clients</div>
                     <div className="stat-value">{dashboardData.totalUser}</div>
                   </div>
                   <div className="stat-icon user-icon"></div>
-                </div>
+                </div>*/}
 
                 <div className="stat-card">
                   <div className="stat-info">
@@ -174,43 +191,49 @@ const Dashboard = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {dashboardData.bookings.length > 0
-                        ? dashboardData.bookings.slice(0, 5).map((booking) => (
-                            <tr key={booking._id}>
-                              <td>
-                                <div className="product-cell">
-                                  <div className="product-image">
-                                    <img
-                                      src={booking.car.images[0]}
-                                      alt={booking.car.plate}
-                                      className="img"
-                                    />
-                                  </div>
-                                  <div>
-                                    {booking.car.brand}
-                                    {booking.plate}
-                                  </div>
+                      {dashboardData.bookings.length > 0 ? (
+                        dashboardData.bookings.slice(0, 5).map((booking) => (
+                          <tr key={booking._id}>
+                            <td>
+                              <div className="product-cell">
+                                <div className="product-image">
+                                  <img
+                                    src={booking.car.images[0]}
+                                    alt={booking.car.plate}
+                                    className="img"
+                                  />
                                 </div>
-                              </td>
-                              <td>{booking.client.names}</td>
-                              <td>{booking.paymentDetails._id}</td>
-                              <td>
-                                {booking.dateBooking} - {booking.returnDate}
-                              </td>
-                              <td>{booking.driver ? "Yes" : "No"}</td>
-                              <td>$ {booking.priceBooking}</td>
-                              <td>
-                                <span
-                                  className={`status-badge ${booking.bookingStatus}`}
-                                >
-                                  {booking.bookingStatus}
-                                </span>
-                              </td>
-                            </tr>
-                          ))
-                        : <tr>
-                        <td colSpan="yourColumnSpan">No bookings found</td>
-                      </tr>}
+                                <div>
+                                  {booking.car.brand}
+                                  {booking.plate}
+                                </div>
+                              </div>
+                            </td>
+                            <td>{booking.clientName || "N/A"}</td>
+                            <td>
+                              {booking.paymentDetails
+                                ? booking.paymentDetails._id
+                                : "N/A"}
+                            </td>
+                            <td>
+                              {booking.dateBooking} - {booking.returnDate}
+                            </td>
+                            <td>{booking.driver ? "Yes" : "No"}</td>
+                            <td>$ {booking.priceBooking}</td>
+                            <td>
+                              <span
+                                className={`status-badge ${booking.bookingStatus}`}
+                              >
+                                {booking.bookingStatus}
+                              </span>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="yourColumnSpan">No bookings found</td>
+                        </tr>
+                      )}
                     </tbody>
                   </table>
                 </div>

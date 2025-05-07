@@ -7,7 +7,7 @@ import Car from "../models/Car.js";
 export const createBooking = async (req, res, next) => {
   try {
     // Add client from token to request body
-    req.body.client = req.user.id;
+    //req.body.client = req.user.id;
 
     // Check if car exists
     const car = await Car.findById(req.body.car);
@@ -21,9 +21,7 @@ export const createBooking = async (req, res, next) => {
 
     // Check if car is available
 
-    if (
-      car.status.toString() !== 'Available'
-    ) {
+    if (car.status.toString() !== "Available") {
       return res.status(400).json({
         success: false,
         error: "Car is not available for booking",
@@ -48,8 +46,8 @@ export const createBooking = async (req, res, next) => {
     const booking = await Booking.create(req.body);
 
     // Update car status to Reserved
-    car.status = 'Reserved';
-    await car.save();
+    //car.status = 'Reserved';
+    //await car.save();
 
     res.status(201).json({
       success: true,
@@ -66,10 +64,6 @@ export const createBooking = async (req, res, next) => {
 export const getBookings = async (req, res, next) => {
   try {
     const bookings = await Booking.find()
-      .populate({
-        path: "client",
-        select: "names email phone",
-      })
       .populate({
         path: "car",
         select: "carId brand images comfort year plate",
@@ -136,11 +130,7 @@ export const updateBookingStatus = async (req, res, next) => {
   try {
     const { status } = req.body;
 
-    if (
-      !["Pending", "Confirmed", "Completed", "Cancelled"].includes(
-        status
-      )
-    ) {
+    if (!["Pending", "Payed", "Confirmed", "Completed", "Cancelled"].includes(status)) {
       return res.status(400).json({
         success: false,
         error: "Invalid booking status",
@@ -162,7 +152,7 @@ export const updateBookingStatus = async (req, res, next) => {
     // If booking is cancelled, make car available again
     if (status === "Cancelled") {
       const car = await Car.findById(booking.car);
-      car.status = 'Available';
+      car.status = "Available";
       await car.save();
     }
 
@@ -182,13 +172,62 @@ export const updateBookingStatus = async (req, res, next) => {
     next(err);
   }
 };
+// @desc    Update booking
+// @route   PUT /api/v1/bookings/:id
+// @access  Private
+export const updateBooking = async (req, res, next) => {
+  try {
+    let booking = await Booking.findById(req.params.id);
+
+    if (!booking) {
+      return res.status(404).json({
+        success: false,
+        error: "Booking not found",
+      });
+    }
+
+    if (!["Pending", "Payed", "Confirmed", "Completed", "Cancelled"].includes(booking.bookingStatus)) {
+      return res.status(400).json({
+        success: false,
+        error: "Invalid booking status",
+      });
+    }
+
+    // If booking is cancelled, make car available again
+    if (booking.bookingStatus === "Cancelled") {
+      const car = await Car.findById(booking.car);
+      car.status = "Available";
+      await car.save();
+    }
+
+    // If booking is confirmed, update the car status
+    if (booking.bookingStatus === "Confirmed") {
+      // Update car status to Rented
+      const car = await Car.findById(booking.car);
+      car.status = 'Reserved';
+      await car.save();
+    }
+    booking = await Booking.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    res.status(200).json({
+      success: true,
+      data: booking,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
 
 // @desc    Get client bookings
 // @route   GET /api/v1/bookings/me
 // @access  Private (Client)
 export const getMyBookings = async (req, res, next) => {
   try {
-    const bookings = await Booking.find({ client: req.user.id })
+    const {id} = req.params.id;
+    const bookings = await Booking.find({ driver: id })
       .populate({
         path: "car",
         select: "carId brand comfort year price plate images",
@@ -240,7 +279,7 @@ export const cancelBooking = async (req, res, next) => {
 
     // Update car status back to Available
     const car = await Car.findById(booking.car);
-    car.status = 'Ready';
+    car.status = "Ready";
     await car.save();
 
     res.status(200).json({

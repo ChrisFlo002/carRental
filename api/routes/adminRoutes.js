@@ -17,6 +17,6 @@ router.post('/login', login);
 router.get('/me', protect, authorize('admin'), getMe);
 router.put('/updatedetails', protect, authorize('admin'), updateDetails);
 router.put('/updatepassword', protect, authorize('admin'), updatePassword);
-router.get('/', protect, authorize('admin'), getAdmins);
+router.get('/', protect, getAdmins);
 
 export default router;

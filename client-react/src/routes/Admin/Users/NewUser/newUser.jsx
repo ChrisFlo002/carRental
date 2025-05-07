@@ -117,7 +117,7 @@ const AdminAddForm = () => {
       console.log("User added successfully:", response.data);
 
       // Reset form after successful submission
-      alert("Admin registered successfully!");
+      alert("User registered successfully!");
 
       setFormData({
         names: "",

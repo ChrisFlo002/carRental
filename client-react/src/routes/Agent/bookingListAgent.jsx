@@ -29,6 +29,7 @@ const BookingListAgent = () => {
   useEffect(() => {
     const fetchBooking = async () => {
       try {
+        console.log("User:", currentUser);
         setIsLoading(true);
         const response = await axios.get(
           "http://localhost:5000/api/v1/bookings/",
@@ -172,7 +173,7 @@ const BookingListAgent = () => {
     ...new Set(bookings.map((booking) => booking.car.plate)),
   ];
   const uniqueUserNames = [
-    ...new Set(bookings.map((booking) => booking.client.names)),
+    ...new Set(bookings.map((booking) => booking.clientName)),
   ];
 
   return (
@@ -408,26 +409,26 @@ const BookingListAgent = () => {
                       <td>
                         <div className="user-info">
                           <div className="user-name">
-                            {booking.client.names}
+                            {booking.clientName}
                           </div>
                           <div className="user-email">
-                            {booking.client.email}
+                            {booking.clientEmail}
                           </div>
                           <div className="user-phone">
-                            {booking.client.phone}
+                            {booking.clientPhone}
                           </div>
                         </div>
                       </td>
                       <td>
                         <div className="user-info">
                           <div className="user-name">
-                            {booking.driver.names || "N/A"}
+                            {booking.driver ? booking.driver.names : "N/A"}
                           </div>
                           <div className="user-email">
-                            {booking.driver.email || "N/A"}
+                            {booking.driver ? booking.driver.email : "N/A"}
                           </div>
                           <div className="user-phone">
-                            {booking.driver.phone || "N/A"}
+                            {booking.driver ? booking.driver.phone : "N/A"}
                           </div>
                         </div>
                       </td>
@@ -490,7 +491,7 @@ const BookingListAgent = () => {
                     <td colSpan="6">No bookings found</td>
                   </tr>
                 )}
-                {showDialog && BookingUpdate({booking, onClose})}
+                {showDialog && <BookingUpdate booking={booking} onClose={onClose}/>}
               </tbody>
             </table>
           </div>

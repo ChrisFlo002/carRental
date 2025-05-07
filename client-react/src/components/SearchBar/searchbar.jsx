@@ -21,7 +21,7 @@ const SearchBar = ({ onSearch }) => {
             onChange={(e) => setMake(e.target.value)}
             className="select-input"
           >
-            <option value="Any Makes">Any Makes</option>
+            <option value="Any Makes">Any Brand</option>
             <option value="Toyota">Toyota</option>
             <option value="Honda">Honda</option>
             <option value="Ford">Ford</option>
@@ -36,12 +36,10 @@ const SearchBar = ({ onSearch }) => {
             onChange={(e) => setModel(e.target.value)}
             className="select-input"
           >
-            <option value="Any Models">Any Models</option>
-            <option value="Corolla">Corolla</option>
-            <option value="Civic">Civic</option>
-            <option value="Model 3">Model 3</option>
-            <option value="RCH 6 EV">RCH 6 EV</option>
-            <option value="F-150">F-150</option>
+            <option value="Any Models">Any Fuel Type</option>
+            <option value="Ev">EV</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="Gasoline">Fuel Car</option>
           </select>
         </div>
 
@@ -52,11 +50,11 @@ const SearchBar = ({ onSearch }) => {
             className="select-input"
           >
             <option value="All Prices">Price: All Prices</option>
-            <option value="0-25000">$0 - $25,000</option>
-            <option value="25000-50000">$25,000 - $50,000</option>
-            <option value="50000-75000">$50,000 - $75,000</option>
-            <option value="75000-100000">$75,000 - $100,000</option>
-            <option value="100000+">$100,000+</option>
+            <option value="0-25">$0 - $25</option>
+            <option value="26-50">$26 - $50</option>
+            <option value="51-75">$51 - $75</option>
+            <option value="76-100">$76 - $100</option>
+            <option value="100+">$100+</option>
           </select>
         </div>
 

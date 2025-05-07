@@ -38,7 +38,6 @@ const BookingSchema = new mongoose.Schema(
     driver: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Admin",
-      required: false,
     },
     car: {
       type: mongoose.Schema.Types.ObjectId,

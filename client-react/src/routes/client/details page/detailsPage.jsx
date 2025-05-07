@@ -3,11 +3,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./detailsPage.scss";
 import { AuthContext } from "../../../context/authContext.jsx";
 import axios from "axios";
+import validateEmail from "../../../utils/usefulFunctions.jsx";
+import PaymentBox from "../../../components/PaymentBox/payment.jsx";
 
 const DetailsPage = () => {
   const { carId } = useParams();
   const [car, setCar] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isBLoading, setIsBLoading] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const { percent } = useContext(AuthContext);
   const [booking, setBooking] = useState({});
@@ -73,20 +76,40 @@ const DetailsPage = () => {
       [name]: type === "checkbox" ? checked : value,
     }));
   };
-
+  //validate form values
+  const validate = () =>{
+    if(!formData.dateBooking || !formData.returnDate || !formData.clientName || !formData.clientEmail || !formData.clientPhone) {
+      alert("Please fill in all fields");
+      return false;
+    }
+    if(!validateEmail(formData.clientEmail)) {
+      alert("Please enter a valid email");
+      return false;
+    }
+    //validate phone
+    if(!/^\d{10,15}$/.test(formData.clientPhone.replace(/[^0-9]/g, ""))) {
+      alert("Please enter a valid phone number with country code");
+      return false;
+    }
+    return true;
+  }
   const handleSubmit = async (e) => {
+    if(!validate()) return;
+    e.preventDefault();
     const booking = {
       car: car._id,
-      client: currentUser._id,
-      dateBooking: fromDate,
-      returnDate: toDate,
+      dateBooking: formData.dateBooking,
+      returnDate: formData.returnDate,
       priceBooking: totalPrice,
       bookingStatus: "Pending",
       withDriver: choiceCond === "Yes" ? true : false,
       addressTake: car.branch.address,
+      clientName: formData.clientName,
+      clientEmail: formData.clientEmail,
+      clientPhone: formData.clientPhone,
     };
     setBooking(booking);
-    setIsLoading(true);
+    setIsBLoading(true);
     try {
       const response = await axios.post(
         "http://localhost:5000/api/v1/bookings/",
@@ -94,18 +117,21 @@ const DetailsPage = () => {
       );
       console.log(response.data);
       setBooking(response.data.data);
-      setIsLoading(false);
       setShowPayBox(true);
     } catch (error) {
       alert("Error creating booking. Please try again.");
-      console.log(error);
-      setIsLoading(false);
+      console.log(error);  
+    }finally{
+      setIsBLoading(false);
     }
   };
   const handleGoBack = () => {
     navigate("/");
   };
-
+  //close payment box
+  const onClose = () =>{
+    setShowPayBox(false);
+  }
   //if (isLoadin) return <div className="details-container">Loading...</div>;
 
   return (
@@ -188,6 +214,7 @@ const DetailsPage = () => {
             name="dateBooking"
             value={formData.dateBooking}
             onChange={handleChange}
+            min={new Date().toISOString().split("T")[0]}
             required
           />
 
@@ -197,10 +224,19 @@ const DetailsPage = () => {
             name="returnDate"
             value={formData.returnDate}
             onChange={handleChange}
+            min={
+              formData.dateBooking
+                ? new Date(
+                    new Date(formData.dateBooking).setDate(new Date(formData.dateBooking).getDate() + 1)
+                  )
+                    .toISOString()
+                    .split("T")[0]
+                : new Date().toISOString().split("T")[0]
+            }
             required
           />
 
-          <label> With driver ({percent} extra without driver)</label>
+          <label> With driver ({percent} % extra without driver)</label>
           <select
             className="bookingStatus"
             id="conductor"
@@ -246,9 +282,10 @@ const DetailsPage = () => {
             required
           />
 
-          <button type="submit">Submit Booking</button>
+          <button type="submit">{isBLoading ? "Loading..." : "Submit Booking"}</button>
         </form>
       </div>
+      {showPayBox && <PaymentBox booking={booking} onClose={onClose} car={car} numberOfDays={numberOfDays} />}
     </div>
   );
 };

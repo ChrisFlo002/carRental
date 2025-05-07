@@ -17,7 +17,7 @@ const MyBookingsPage = () => {
       try {
         setIsLoading(true);
         const response = await axios.get(
-          "http://localhost:5000/api/v1/bookings/me",
+          `http://localhost:5000/api/v1/bookings/me/${currentUser._id}`,
           { headers: { Authorization: `Bearer ${currentUser.token}` }}
         );
         setBookings(response.data.data);
