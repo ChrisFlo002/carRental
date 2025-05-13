@@ -1,5 +1,6 @@
 import PaymentDetails from "../models/PaymentDetails.js";
 import Booking from "../models/Booking.js";
+import Car from "../models/Car.js";
 
 // @desc    Create payment
 // @route   POST /api/v1/payments
@@ -8,14 +9,14 @@ export const createPayment = async (req, res, next) => {
   try {
     // Check if booking exists
     const booking = await Booking.findById(req.body.booking);
-
+    
     if (!booking) {
       return res.status(404).json({
         success: false,
         error: "Booking not found",
       });
     }
-
+    const car = await Car.findById(booking.car);
     // Check if user is authorized
     /*if (booking.client.toString() !== req.user.id && req.userType !== "admin") {
       return res.status(401).json({
@@ -43,6 +44,8 @@ export const createPayment = async (req, res, next) => {
     booking.paymentDetails = payment._id;
     booking.bookingStatus = "Payed";
     await booking.save();
+    car.status = "Reserved";
+    await car.save();
 
     res.status(201).json({
       success: true,

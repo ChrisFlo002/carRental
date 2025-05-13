@@ -346,15 +346,15 @@ const BookingListAgent = () => {
                       </td>
                       <td>
                         <div className="booking-actions">
-                          {booking.bookingStatus === "Payed" ||
-                            (booking.bookingStatus === "Pending" && (
+                          {
+                            booking.bookingStatus === "Payed" || booking.bookingStatus === "Pending" ?  (
                               <button
                                 className="btn-accept"
                                 onClick={() => updateBooking(booking)}
                               >
                                 Accept
                               </button>
-                            ))}
+                            ): ""}
                           {booking.bookingStatus === "Confirmed" && (
                             <button
                               className="btn-decline"

@@ -147,7 +147,7 @@ const BookingList = () => {
     ...new Set(bookings.map((booking) => booking.car.plate)),
   ];
   const uniqueUserNames = [
-    ...new Set(bookings.map((booking) => booking.client.names)),
+    ...new Set(bookings.map((booking) => booking.clientName)),
   ];
 
   return (
@@ -347,13 +347,13 @@ const BookingList = () => {
                       <td>
                         <div className="user-info">
                           <div className="user-name">
-                            {booking.client.names}
+                            {booking.clientName}
                           </div>
                           <div className="user-email">
-                            {booking.client.email}
+                            {booking.clientEmail}
                           </div>
                           <div className="user-phone">
-                            {booking.client.phone}
+                            {booking.clientPhone}
                           </div>
                         </div>
                       </td>

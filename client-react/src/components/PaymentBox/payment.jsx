@@ -55,8 +55,7 @@ const PaymentBox = ({ booking, onClose, car, numberOfDays }) => {
         phoneNumber: phoneNumber,
       };
       const response = await axios.post("http://localhost:5000/api/v1/payments/",
-        payment,
-        { headers: { Authorization: `Bearer ${currentUser.token}` } }
+        payment
       );
       console.log("Payment:",response.data.data);
       //update the booking status with api api/v1/bookings/:id/status

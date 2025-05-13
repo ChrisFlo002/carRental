@@ -146,7 +146,7 @@ const CarsContent = () => {
                 : cars.length > 0
                 ? cars.map((car) => (
                     <div className="grid-item" key={car._id}>
-                      <CarBox car={car} />
+                      <CarBox car={car} profile={"Admin"}/>
                     </div>
                   ))
                 : "Loading cars..."}

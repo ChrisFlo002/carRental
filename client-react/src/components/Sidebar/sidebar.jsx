@@ -25,7 +25,7 @@ const Sidebar = () => {
     { icon: <FaUsers />, name: "Users", path: "/dash/users" },
     { icon: <FaCalendarCheck />, name: "Booking", path: "/dash/bookingAdmin" },
     { icon: <FaBuildingColumns />, name: "Branch", path: "/dash/branches" },
-    //{ icon: <FaFileAlt />, name: "Reports", path: "/dash/report" }
+    { icon: <FaFileAlt />, name: "Reports", path: "/dash/report" }
   ];
   const menuItemsAgent = [{icon: <FaCalendarCheck />, name: "Bookings", path: "/agent"}];
   const menuItemsDriver = [{icon: <FaCalendarCheck />, name: "My Bookings", path: "/driver"}];

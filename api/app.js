@@ -12,6 +12,7 @@ import bookingRoutes from './routes/bookingRoutes.js';
 import maintenanceRoutes from './routes/maintenanceRoutes.js';
 import paymentRoutes from './routes/paymentRoutes.js';
 import branchRoutes from './routes/branchRoutes.js';
+import reportRoutes from './routes/reportRoutes.js';
 
 // Load env vars
 dotenv.config();
@@ -39,6 +40,7 @@ app.use('/api/v1/bookings', bookingRoutes);
 app.use('/api/v1/maintenance', maintenanceRoutes);
 app.use('/api/v1/payments', paymentRoutes);
 app.use('/api/v1/branches', branchRoutes);
+app.use('/api/v1/reports', reportRoutes);
 
 // Error handler middleware (should be last)
 app.use(errorHandler);
